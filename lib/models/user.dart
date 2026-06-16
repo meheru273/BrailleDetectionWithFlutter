@@ -8,7 +8,6 @@ class Users {
   Timestamp createdOn;
   Timestamp updatedOn;
   Timestamp? birthDate;
-  List<String> books;
 
   Users({
     required this.firstName,
@@ -17,21 +16,18 @@ class Users {
     required this.createdOn,
     required this.updatedOn,
     required this.gender,
-    required this.birthDate,
-    required this.books,
+    required this.birthDate
   });
 
   Users.fromJson(Map<String, Object?> json)
-      : this(
-          firstName: json['firstName']! as String,
-          lastName: json['lastName']! as String,
-          mail: json['mail']! as String,
-          gender: json['gender']! as String,
-          createdOn: json['createdOn']! as Timestamp,
-          updatedOn: json['updatedOn']! as Timestamp,
-          birthDate: json['birthDate']! as Timestamp,
-          books: json['books']! as List<String>,
-        );
+      : firstName = json['firstName'] as String? ?? '',
+        lastName = json['lastName'] as String? ?? '',
+        mail = json['mail'] as String? ?? '',
+        gender = json['gender'] as String?,
+        createdOn = json['createdOn'] as Timestamp? ?? Timestamp.now(),
+        updatedOn = json['updatedOn'] as Timestamp? ?? Timestamp.now(),
+        birthDate = json['birthDate'] as Timestamp?;
+
 
   Users copyWith({
     String? firstName,
@@ -41,7 +37,6 @@ class Users {
     Timestamp? createdOn,
     Timestamp? updatedOn,
     Timestamp? birthDate,
-    List<String>? books,
   }) {
     return Users(
       firstName: firstName ?? this.firstName,
@@ -51,7 +46,6 @@ class Users {
       updatedOn: updatedOn ?? this.updatedOn,
       gender: gender ?? this.gender,
       birthDate: birthDate ?? this.birthDate,
-      books: books ?? this.books,
     );
   }
 
@@ -64,7 +58,6 @@ class Users {
       'createdOn': createdOn,
       'updatedOn': updatedOn,
       'birthDate': birthDate,
-      'books': books,
     };
   }
 }
